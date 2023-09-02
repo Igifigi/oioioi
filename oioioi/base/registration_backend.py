@@ -64,7 +64,11 @@ class RegistrationView(DefaultRegistrationView):
 
 urlpatterns = [
     re_path(r'^sign-up/$', RegistrationView.as_view(), name='sign-up'),
-    re_path(r'^register/$', RedirectView.as_view(url='/sign-up/', permanent=True), name='registration_redirect'),
+    re_path(
+        r'^register/$',
+        RedirectView.as_view(pattern_name='sign-up', permanent=True),
+        name='registration_redirect',
+    ),
 ]
 
 if not settings.SEND_USER_ACTIVATION_EMAIL:
